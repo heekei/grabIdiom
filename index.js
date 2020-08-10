@@ -50,13 +50,14 @@ async function main() {
             const shortUrl = imgElm.attr('src');
             const imgUrl = 'http://www.hydcd.com/cy/fkccy/' + shortUrl;
             const subfix = imgUrl.substr(imgUrl.lastIndexOf('.'), imgUrl.length);
-            let answer = imgElm.attr('alt');
+            let alt = imgElm.attr('alt');
+            let answer = alt ? alt.substr(-4) : '';
             if (!answer) {
                 const a = $(item).find('a');
                 if (a.length > 0) {
-                    answer = a.text();
+                    answer = a.text().substr(-4);
                 } else {
-                    answer = $(item).find('p').eq(2).text().trim().split(/[:：]/)[1]
+                    answer = $(item).find('p').eq(2).text().trim().substr(-4)
                 }
             }
             if (answer && shortUrl) {
